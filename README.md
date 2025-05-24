@@ -11,6 +11,11 @@ An AI/ML-powered chatbot that allows users to upload PDF documents and ask quest
 - Embedding-powered NLP with Sentence Transformers
 - Lightweight UI via Flask
 - Easy deployment with Docker
+
+- ##  Instructions to run in docker container
+- docker build -t pdf-chatbot .
+ -docker run -p 5000:5000 pdf-chatbot
+
 ##  NLP approach
 🧠 NLP Approach
 Embedding Model: all-MiniLM-L6-v2 from Sentence Transformers
@@ -41,3 +46,6 @@ python -m venv venv
 venv\Scripts\activate      # Windows
 pip install -r requirements.txt
 python main.py
+
+
+
