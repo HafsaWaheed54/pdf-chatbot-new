@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>PDF Chatbot</title>
+    <style>
+        /* Import Google Font */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+        /* Reset some defaults */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #6b73ff 0%, #000dff 100%);
+            margin: 0;
+            padding: 40px 20px;
+            color: #f0f0f0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .container {
+            background: #1e263b;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 600px;
+            padding: 30px 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        h2 {
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: #a0c4ff;
+            text-align: center;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        form {
+            margin-bottom: 40px;
+        }
+
+        input[type="file"] {
+            display: block;
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 12px;
+            border: none;
+            background: #2e3a59;
+            color: #d1d9ff;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        input[type="file"]:hover {
+            background: #44518a;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 90px);
+            padding: 14px 18px;
+            border-radius: 12px 0 0 12px;
+            border: none;
+            font-size: 16px;
+            background: #2e3a59;
+            color: #f0f0f0;
+            outline-offset: 2px;
+            outline-color: #a0c4ff;
+            transition: background-color 0.3s ease;
+        }
+        input[type="text"]:focus {
+            background: #394a80;
+        }
+
+        button {
+            width: 80px;
+            background-color: #4e86ff;
+            color: white;
+            padding: 14px 0;
+            border: none;
+            border-radius: 0 12px 12px 0;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.25s ease;
+            box-shadow: 0 4px 15px rgba(78, 134, 255, 0.5);
+        }
+        button:hover {
+            background-color: #739eff;
+            box-shadow: 0 6px 20px rgba(115, 158, 255, 0.7);
+        }
+
+        #response {
+            margin-top: 20px;
+            background: #2e3a59;
+            border-radius: 16px;
+            padding: 25px;
+            min-height: 100px;
+            font-size: 16px;
+            line-height: 1.5;
+            color: #d1d9ff;
+            box-shadow: inset 0 0 15px #4e86ff88;
+            white-space: pre-wrap;
+            user-select: text;
+        }
+
+        /* Layout for input + button */
+        .chat-input {
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            body {
+                padding: 20px 10px;
+            }
+            .container {
+                padding: 20px 25px;
+            }
+            input[type="text"] {
+                width: 100%;
+                border-radius: 12px;
+                margin-bottom: 12px;
+            }
+            button {
+                width: 100%;
+                border-radius: 12px;
+            }
+            .chat-input {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Upload Your PDF</h2>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="pdf" accept="application/pdf" required />
+            <button type="submit" style="margin-top: 20px; width: 100%;">Upload</button>
+        </form>
+
+        <h2>Chat with PDF</h2>
+        <div class="chat-input">
+            <input id="message" type="text" placeholder="Ask a question..." autocomplete="off" />
+            <button onclick="sendMessage()">Send</button>
+        </div>
+
+        <div id="response">Responses will appear here...</div>
+    </div>
+
+    <script>
+        function sendMessage() {
+            const msg = document.getElementById("message").value;
+            if (!msg.trim()) return;
+
+            document.getElementById("response").innerText = "Loading...";
+
+            fetch('/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: msg })
+            })
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById("response").innerText = data.response;
+                document.getElementById("message").value = "";
+            })
+            .catch(err => {
+                document.getElementById("response").innerText = "Error: " + err.message;
+            });
+        }
+
+        // Optional: allow pressing Enter to send
+        document.getElementById("message").addEventListener("keydown", function(e) {
+            if (e.key === "Enter") {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>

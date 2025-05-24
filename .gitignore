@@ -1,0 +1,64 @@
+# Python general
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+.venv/
+venv.cfg
+
+# Flask-specific
+instance/
+.webassets-cache
+
+# Data directory (if any)
+data/
+
+# Logs
+logs/
+*.log
+
+# IDEs and editors
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# OS-specific files/directories
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Docker
+docker-compose.yml
+docker-compose.override.yml
+docker-compose.prod.yml
+*.local.env
+!.env.example
+
+# Miscellaneous
+*.sqlite3
+*.db
+*.db-journal
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+
+# Build artifacts
+build/
+dist/
+
+# Test reports
+htmlcov/
+.pytest_cache/
+.nosetests
+coverage.xml
+.tox/
+
+# Environment files
+.env

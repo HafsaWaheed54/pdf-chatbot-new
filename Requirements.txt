@@ -1,0 +1,9 @@
+flask
+pdfplumber>=0.11.5
+sentence-transformers
+scikit-learn
+numpy>=1.21,<1.25  # Compatible with numba 0.57.1 from prior errors
+faiss-cpu>=1.7.0,<1.9.0  # Adjusted from prior step (1.8.0 is latest)
+torch>=2.3.0,<2.7.0  # Compatible with torchvision 0.18.0
+torchvision>=0.18.0
+nltk

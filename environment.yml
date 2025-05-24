@@ -1,0 +1,22 @@
+name: chatbot_env
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - flask
+  - pymupdf
+  - sentence-transformers
+  - scikit-learn
+  - numpy
+  - torch
+  - torchvision
+  - httpx
+  - urllib3
+  - faiss-cpu
+  - gradio
+  - click
+  - dill
+  - requests-mock
+  - clyent=1.2.1
+  - pyyaml=6.0.1
