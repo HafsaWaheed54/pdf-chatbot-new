@@ -11,6 +11,21 @@ An AI/ML-powered chatbot that allows users to upload PDF documents and ask quest
 - Embedding-powered NLP with Sentence Transformers
 - Lightweight UI via Flask
 - Easy deployment with Docker
+##  NLP approach
+🧠 NLP Approach
+Embedding Model: all-MiniLM-L6-v2 from Sentence Transformers
+
+Similarity Matching: NearestNeighbors from scikit-learn (instead of FAISS)
+
+Text Chunking: The document is split into 500-character text blocks
+
+Query Flow:
+
+User query → embedded
+
+Nearest text chunk retrieved
+
+Response returned from matching chunk
 
 ---
 
